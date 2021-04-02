@@ -180,14 +180,14 @@ exports.BlockFinder = (requestBlock, blocks = []) => {
   async function getLatestBlock() {
     const block = await requestBlock();
     const index = lodash.sortedIndexBy(blocks, block, "number");
-    if (blocks[index]?.number !== block.number) blocks.splice(index, 0, block);
+    if (blocks[index].number !== block.number) blocks.splice(index, 0, block);
     return blocks[index];
   }
 
   // Grabs the block for a particular number and caches it.
   async function getBlock(number) {
     const index = lodash.sortedIndexBy(blocks, { number }, "number");
-    if (blocks[index]?.number === number) return blocks[index]; // Return early if block already exists.
+    if (blocks[index].number === number) return blocks[index]; // Return early if block already exists.
     const block = await requestBlock(number);
     blocks.splice(index, 0, block); // A simple insert at index.
     return block;

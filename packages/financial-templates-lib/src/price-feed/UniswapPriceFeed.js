@@ -108,7 +108,7 @@ class UniswapPriceFeed extends PriceFeedInterface {
     let fromBlock = Infinity; // Arbitrary initial value > 0.
 
     // For loop continues until the start block hits 0 or the first event is before the earlest lookback time.
-    for (let i = 0; !(fromBlock === 0 || events[0]?.timestamp <= earliestLookbackTime); i++) {
+    for (let i = 0; !(fromBlock === 0 || events[0].timestamp <= earliestLookbackTime); i++) {
       // Uses latest unless the events array already has data. If so, it only queries _before_ existing events.
       const toBlock = events[0] ? events[0].blockNumber - 1 : "latest";
 
